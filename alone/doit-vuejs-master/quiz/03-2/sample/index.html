@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Components Registration Quiz</title>
+    <script src="js/vendor/vue.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h3>{{ message }}</h3>
+        <todo-footer></todo-footer>
+        <local-todo-footer></local-todo-footer>
+      </header>
+      <!-- 실습 #3 - 전역 컴포넌트 등록을 위한 `todo-footer` 태그 추가 -->
+      
+
+      <!-- 실습 #4 - 지역 컴포넌트 등록을 위한 `todo-list` 태그 추가 -->
+
+    </div>
+    <script>
+        Vue.component('todo-footer',{
+          template: '<p>This is another global child component</p>'
+        })
+        var cmp = {
+          template: '<p>This is another Local child component</p>'
+        }
+        new Vue({
+          el: '#app',
+          data: {
+            message: 'This is parent Component'
+          },
+          components: {
+            'local-todo-footer': cmp
+          }
+        })
+      </script>
+
+    
+  </body>
+</html>

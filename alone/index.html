@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Vue Sample</title>
+        <script src="https://unpkg.com/vue"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{message}}
+        </div>
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hello Vue.js!'
+                },
+                beforeCreate: function () {
+                    console.log('beforeCreate');
+                },
+                created() {
+                    console.log('created');
+                },
+                mounted() {
+                    console.log('mounted');
+                    this.message = 'Hello Vue!'; // message를 갱신하면서 beforeUpdate, updated 실행됨
+                    // console.log(this.message);
+                },
+                // beforeUpdate() {
+                //     console.log('BeforeUpdate');
+                // },
+                updated() {
+                    console.log('updated');
+                },
+            })
+        </script>
+        <div id="app02-1">
+            <h3>첫번째 인스턴스영역</h3>
+            <button>컴포넌트 등록</button>
+            <my-component></my-component>
+            <my-local-component></my-local-component>
+        </div>
+        <hr>
+        <div id="app02-2">
+            <h3>두번째 인스턴스영역</h3>
+            <button>컴포넌트 등록</button>
+            <my-component></my-component>
+            <my-local-component></my-local-component><!--지역 컴포넌트는 보이지 않음(유효범위가 다르다)-->
+        </div>
+        <script>
+            Vue.component('my-component', {
+                template: '<div>전역 컴포넌트가 등록되었습니다.</div>'
+            }); //전역(한번 등록하면 어느 인스턴스건 사용 가능)
+            var cmp = {
+                // 컴포넌트 내용
+                template: '<div>지역 컴포넌트 등록!</div>'// 인스턴스 선언마다 새로 등록해야함
+            }
+            new Vue({
+                el: '#app02-1',
+                components: {
+                    'my-local-component': cmp
+                }
+            });
+            new Vue({
+                el: '#app02-2'
+            })
+        </script>
+    </body>
