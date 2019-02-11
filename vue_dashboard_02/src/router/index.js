@@ -4,6 +4,7 @@ import HelloWorld from '@/views/HelloWorld'
 import NoticeList from '@/views/notice/NoticeList.vue'
 import NoticeDetail from '@/views/notice/NoticeDetail.vue'
 import NoticeRegister from '@/views/notice/NoticeRegister.vue'
+import PopupRegister from '@/views/popup/PopupRegister.vue'
 import NotFound from '@/404.vue'
 
 
@@ -14,6 +15,11 @@ const routes = [
     path: '/',
     name: 'HelloWorld',
     component: HelloWorld
+  },
+  {
+    path: '/popupRegister',
+    name: 'PopupRegister',
+    component: PopupRegister
   },
   {
     path: '/noticeList',

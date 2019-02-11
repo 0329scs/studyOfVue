@@ -11,6 +11,7 @@
     >
       <el-menu-item index="0" :route="{name:'HelloWorld'}">HOME</el-menu-item>
       <el-menu-item index="1" :route="{name:'NoticeList'}">NOTICE</el-menu-item>
+      <el-menu-item index="2" :route="{name:'PopupRegister'}">POPUP</el-menu-item>
     </el-menu>
   </el-scrollbar>
 </template>
