@@ -4,11 +4,11 @@
   </head>
   <body>
     <div id="app">
-      <a v-if="flag">두잇 Vue.js</a>
+      <a v-if="flag">두잇 Vue.js</a><!-- 태그까지 아예 삭제 -->
       <ul>
         <li v-for="system in systems">{{ system }}</li>
       </ul>
-      <p v-show="flag">두잇 Vue.js</p>
+      <p v-show="flag">두잇 Vue.js</p><!-- 태그는 존재하고 css display: none으로만 안보여짐 -->
       <h5 v-bind:id="uid">뷰 입문서</h5>
       <button v-on:click="popupAlert">경고 창 버튼</button>
     </div>
@@ -19,7 +19,7 @@
         el: '#app',
         data: {
           flag: true,
-          systems: ['android', 'ios', 'window'],
+          systems: ['android', 'ios', 'window', 'safari'],
           uid: 10
         },
         methods: {

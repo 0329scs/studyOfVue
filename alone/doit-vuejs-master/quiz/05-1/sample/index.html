@@ -9,7 +9,7 @@
     <div id="app">
       <header>
         <h3>
-          {{ message }},
+          {{ message }}, {{ secondMsg }}
           <!-- #1. 새로 추가한 데이터 속성을 아래에 추가 -->
         </h3>
       </header>
@@ -18,6 +18,7 @@
         <p v-bind:id="uid"></p>
 
         <button v-on:click="clickBtn">alert</button>
+        <button v-on:click="clickBtn2">alert btn2</button>
         <!-- 위 코드와 아래 코드는 동일한 역할을 수행. v-on:를 간소화한 문법은 @ -->
         <!-- <button @click="clickBtn">alert</button> -->
 
