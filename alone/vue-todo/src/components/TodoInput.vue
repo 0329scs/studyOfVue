@@ -69,7 +69,7 @@ export default {
         border-radius: 0 5px 5px 0;
     }
     .addBtn {
-        color: white;
+        color: #fff;
         vertical-align: middle;
     }
 </style>
