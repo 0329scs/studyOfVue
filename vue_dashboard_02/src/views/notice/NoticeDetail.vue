@@ -15,7 +15,7 @@
       </el-form-item>
     </el-form>
     <div class="bottomBtns">
-      <el-button type="primary" @click="$router.push('/noticeList')">목록</el-button>
+      <el-button type="primary" @click="$router.push('/notice/list')">목록</el-button>
       <el-button type="primary" @click="onUpdate">수정</el-button>
       <el-button type="primary" @click="onDelete">삭제</el-button>
     </div>
@@ -34,7 +34,7 @@
     methods: {
       onUpdate() {
         this.$router.push({
-          path: '/noticeRegister',
+          path: '/notice/register',
           query: {no:this.no}
         })
       },
@@ -46,7 +46,7 @@
         })
         .then(res => {
           console.log('res = ', res);
-          if (res.data.ok) this.$router.push('/noticeList')
+          if (res.data.ok) this.$router.push('/notice/list')
         })
         .catch(err => {
           console.log(err);

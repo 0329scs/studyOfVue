@@ -94,7 +94,7 @@
         })
         .then(res => {
           console.log('res = ', res);
-          if (res.data.ok) this.$router.push('/noticeList')
+          if (res.data.ok) this.$router.push('/notice/list')
         })
         .catch(err => {
           console.log(err);
@@ -114,7 +114,7 @@
         })
         .then(res => {
           console.log('res = ', res);
-          if (res.data.ok) this.$router.push('/noticeList')
+          if (res.data.ok) this.$router.push('/notice/list')
         })
         .catch(err => {
           console.log(err);
@@ -133,7 +133,7 @@
           type: 'warning'
         })
         .then(() => {
-          this.$router.push('/noticeList')
+          this.$router.push('/notice/list')
         })
         .catch(() => {
           this.$message({

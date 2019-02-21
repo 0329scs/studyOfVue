@@ -13,8 +13,15 @@
       </el-table-column>
     </el-table>
     
+    <el-pagination layout="prev, pager, next" 
+      :page-size="pageSize" 
+      :total="total"
+      :current-page.sync="currentPage" 
+      @current-change="onPageChange"> 
+    </el-pagination>
+
     <div class="bottomBtns">
-      <el-button @click="$router.push('/noticeRegister')" type="primary">공지사항 등록</el-button>
+      <el-button @click="$router.push('/notice/register')" type="primary">공지사항 등록</el-button>
     </div>
   </section>
 </template>
@@ -25,36 +32,58 @@
   export default {
     data() {
       return {
-        noticeData: []
+        noticeData: [],
+        total: 1,
+        pageSize: 10,
+        currentPage: 1
       }
     },
     methods: {
-     onSubmit() {
-       this.$router.push('/noticeRegister') //$router.push('경로설정') 
-     },
-     onDetail(no) {
-      //  console.log('no = ', no);
-       this.$router.push({
-         path: '/noticeDetail',
-         query: {no:no}
-       })
-     }
-   },
-    created() {
+      onList() {
+        axios.get('http://localhost:3000/notice/list')
+        .then(res => {
+          const data = camelCase(res.data.body)
+          console.log('data = ', data)
+          // this.noticeData = data
+
+          console.log('data.length =', data.length);
+
+          this.total = data.length
+
+          let currnetMaxLow = this.currentPage * this.pageSize
+          let currnetMinLow = currnetMaxLow - this.pageSize
+
+          console.log(currnetMaxLow, currnetMinLow)
+
+          this.noticeData = data.slice(currnetMinLow, currnetMaxLow)
+          
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          
+        })
+      },
+      onSubmit() {
+        this.$router.push('/noticeRegister') //$router.push('경로설정') 
+      },
+      onDetail(no) {
+        //  console.log('no = ', no);
+        this.$router.push({
+          path: '/notice/detail',
+          query: {no:no}
+        })
+      },
+      onPageChange(pageNo) {
+        console.log(pageNo);
+        this.currentPage = pageNo
+        this.onList();
+      }
+    },
+    mounted() {
       console.log('noticeList');
-      axios.get('http://localhost:3000/notice/list')
-      .then(res => {
-        const data = camelCase(res.data.body)
-        console.log('data = ', data)
-        this.noticeData = data
-        
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-         
-      })
+      this.onList();
     }
   }
 </script>
