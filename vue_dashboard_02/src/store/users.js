@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+// import axios from 'axios'
 import Cookies from 'js-cookie'
+import { userLogin } from '@/api/app.js'
 
 Vue.use(Vuex)
 
@@ -27,8 +28,8 @@ const user = {
         // 비동기로직 즉 통신
 
         Login({ commit }, userInfo) {
-            axios.post('http://localhost:3000/login', {
-                data: userInfo
+            userLogin({
+                userInfo
             })
             .then(res => {
                 console.log(res)

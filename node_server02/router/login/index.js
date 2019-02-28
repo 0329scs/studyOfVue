@@ -5,8 +5,8 @@ const connection = require('../config/database.js')
 router.post('/', (req, res) => {
     console.log('req.body = ', req.body)
 
-    const id = req.body.data.username
-    const pw = req.body.data.password
+    const id = req.body.userInfo.username
+    const pw = req.body.userInfo.password
 
     connection.query(`SELECT LOGIN_ID FROM TB_MBR WHERE LOGIN_ID = ? AND LOGIN_PW = ?`
         , [id, pw]

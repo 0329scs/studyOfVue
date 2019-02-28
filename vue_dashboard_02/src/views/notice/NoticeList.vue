@@ -27,8 +27,9 @@
 </template>
 
 <script>
-  import axios from 'axios' 
+  // import axios from 'axios'
   import camelCase from 'camelcase-keys'
+  import {noticeList} from '@/api/app.js'
   export default {
     data() {
       return {
@@ -40,7 +41,8 @@
     },
     methods: {
       onList() {
-        axios.get('http://localhost:3000/notice/list')
+        // axios.get('http://localhost:3000/notice/list')
+        noticeList()
         .then(res => {
           const data = camelCase(res.data.body)
           console.log('data = ', data)

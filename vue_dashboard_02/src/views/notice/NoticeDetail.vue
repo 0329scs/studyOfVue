@@ -13,6 +13,9 @@
       <el-form-item label="내용">
         <el-input v-html="form.conts" readonly></el-input>
       </el-form-item>
+      <el-form-item label="이미지">
+        <img :src="imgFile"/>
+      </el-form-item>
     </el-form>
     <div class="bottomBtns">
       <el-button type="primary" @click="$router.push('/notice/list')">목록</el-button>
@@ -25,8 +28,9 @@
 
 <script>
   import { VueEditor } from 'vue2-editor'
-  import axios from 'axios'
+  // import axios from 'axios'
   import camelCase from 'camelcase-keys'
+  import {noticeDetail, noticeDelete} from '@/api/app.js'
   export default {
     components: {
       VueEditor
@@ -39,10 +43,14 @@
         })
       },
       onDelete() {
-        axios({
-          method: 'POST',
-          url: 'http://localhost:3000/notice/delete',
-          data: {no: this.no}
+        // axios({
+        //   method: 'POST',
+        //   url: 'http://localhost:3000/notice/delete',
+        //   data: {no: this.no}
+        // })
+        noticeDelete({
+          no: this.no,
+          form: this.form
         })
         .then(res => {
           console.log('res = ', res);
@@ -65,8 +73,9 @@
     },
     created() {
       console.log('no =', this.$route.query.no)
-      axios.get(`http://localhost:3000/notice/detail/${this.no}`)
+      // axios.get(`http://localhost:3000/notice/detail/${this.no}`)
       // axios.get(`http://localhost:3000/notice/detail?no=${no}`) // queryString
+      noticeDetail(this.no)
         .then(res => {
           console.log('res = ', res.data.body);
           
@@ -75,6 +84,10 @@
           console.log('data = ', data);
 
           this.form = data
+
+          if(data.phyImgName) {
+            this.imgFile = `http://localhost:3000/images/${data.phyImgName}`
+          }
         })
         .catch((err) => {
           console.log(err)
