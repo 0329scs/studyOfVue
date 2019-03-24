@@ -48,3 +48,7 @@ export const noticeModify = (data) => {
         data
     })
 }
+// 회원가입
+export const registration = (data) => {
+    return service.post('/registration', data)
+}

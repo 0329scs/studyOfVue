@@ -7,6 +7,7 @@ import VueRouter from 'vue-router'
 // import PopupRegister from '@/views/popup/PopupRegister.vue'
 import Layout from '@/components/Layout.vue'
 import NotFound from '@/404.vue'
+import Cookies from 'js-cookie'
 
 
 Vue.use(VueRouter)
@@ -24,6 +25,17 @@ const routes = [
     }]
   },
   {
+    path: '/',
+    component: Layout,
+    children: [
+      {
+        path: '/registration',
+        name: 'Registration',
+        component: () => import('@/views/registration/Registration')
+      }
+    ]
+  },
+  {
     path: '/login',
     hidden: true,
     component: () => import('@/views/login/index.vue')
@@ -36,7 +48,31 @@ const routes = [
       {
         path: 'list',
         name: 'NoticeList',
-        component: () => import('@/views/notice/NoticeList.vue')
+        component: () => import('@/views/notice/NoticeList.vue'),
+        beforeEnter: (to, from, next) => {
+          console.log('======    to     ======')
+          console.log(to)
+          console.log('======    to     ======')
+
+          console.log('======    from     ======')
+          console.log(from)
+          console.log('======    from     ======')
+
+          if (Cookies.get('token')) {
+            if (to.path === '/login') {
+              next({ path: `/` })
+            } else {
+              next()
+            }
+          } else {
+            if (to.path !== '/login') {
+              // next({path:'/login'})
+              next({path:`/login?redirect=${to.path}`})
+            } else {
+              next()
+            }
+          }
+        }
       },
       {
         path: 'detail',
