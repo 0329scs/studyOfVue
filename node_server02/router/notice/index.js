@@ -36,8 +36,13 @@ router.post('/register', upload.single('image'), (req, res) => {
   // 이미지 처리
   console.log('req.file', req.file)
 
-  const oriImgName = req.file.originalname
-  const phyImgName = req.file.filename
+  let oriImgName = '',
+      phyImgName = ''
+
+  if(req.file) {
+    oriImgName = req.file.originalname
+    phyImgName = req.file.filename
+  }
 
   console.log('oriImgName = ', oriImgName)
   console.log('phyImgName = ', phyImgName)
@@ -223,7 +228,11 @@ router.post('/delete', (req, res) => {
 })
 
 router.get('/list', (req, res) => {
-  console.log('[[[[[ NOTICE LIST ]]]]]');
+  console.log('[[[[[  NOTICE LIST   ]]]]]')
+
+  console.log('req.params = ', req.query)
+
+  const search = req.query.search
 
   connection.query(`SELECT 
                       NOTICE_MNG_NO
@@ -232,23 +241,21 @@ router.get('/list', (req, res) => {
                     , CONTS
                     , DATE_FORMAT(REG_DT, "%Y-%m-%d %H:%i") REG_DT
                     FROM TB_NOTICE02
+                    WHERE SUBJ LIKE '%${search}%'
                     ORDER BY NOTICE_MNG_NO DESC`, (err, rows) => {
-
-    if(err) return res.status(401).json({err: '에러발생'})
-
-    if(rows.length) {
+    
+    if (err) return res.status(401).json({err:'에러발생'})
+    // if (rows.length) {
       console.log(rows)
-
       const resData = {}
-      
+
       resData.ok = true
       resData.body = rows
 
       res.status(200)
       res.json(resData)
-    }
 
-    
+    // }
   })
 })
 

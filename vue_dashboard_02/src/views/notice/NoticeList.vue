@@ -1,5 +1,27 @@
 <template>
   <section>
+    <el-form class="toolbar" :inline="true">
+      <el-form-item label="검색">
+          <el-row :gutter="5">
+            <el-col :span="6">
+              <el-select v-model="noticeOption" placeholder="Select">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-col>
+          <el-col :span="14">
+            <el-input v-model="search" @keyup.enter.native="onList" placeholder="검색어를 입력하세요"></el-input>
+          </el-col>
+          <el-col :span="4">
+            <el-button type="primary" @click="onList">검색</el-button>
+          </el-col>
+        </el-row>
+      </el-form-item>
+    </el-form>
     <el-table :data="noticeData">
       <el-table-column prop="noticeMngNo" label="No" width="70" align="center"></el-table-column>
       <el-table-column prop="subj" label="제목" header-align="center">
@@ -42,7 +64,7 @@
     methods: {
       onList() {
         // axios.get('http://localhost:3000/notice/list')
-        noticeList()
+        noticeList({search:this.search})
         .then(res => {
           const data = camelCase(res.data.body)
           console.log('data = ', data)

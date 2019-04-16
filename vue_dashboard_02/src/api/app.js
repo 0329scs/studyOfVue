@@ -15,9 +15,9 @@ export const userLogin = (data) => {
 }
 
 // notice...
-export const noticeList = () => {
+export const noticeList = (params) => {
     return service({
-        url: '/notice/list',
+        url: `/notice/list/${params}`,
         method: 'get'
     })
 }

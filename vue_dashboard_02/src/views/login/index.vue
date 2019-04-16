@@ -28,6 +28,16 @@
           로그인
         </el-button>
       </el-form-item>
+      <el-form-item>
+        <el-button :loading="loading" type="primary" style="width:100%;" @click="$router.push('/')">
+          비회원
+        </el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-button :loading="loading" type="primary" style="width:100%;" @click="$router.push('/registration')">
+          회원가입
+        </el-button>
+      </el-form-item>
       <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
         <span> password: admin</span>

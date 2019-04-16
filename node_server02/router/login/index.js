@@ -16,9 +16,9 @@ router.post('/', (req, res) => {
       , [id]
       , (err, rows) => {
   console.log('===아이디 비밀번호 받음===')
-  console.log(err)
+
   if (err) return res.status(401).json({err:'에러발생'})
-  console.log('salt = ',rows[0].SALT)
+  console.log('salt = ',rows[0].SALT);
   console.log('pw = ', rows[0].LOGIN_PW);
   
   crypto.pbkdf2(pw, rows[0].SALT, 100000, 64, 'sha512', (err, key) => {
