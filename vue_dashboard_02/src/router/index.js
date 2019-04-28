@@ -75,11 +75,13 @@ const routes = [
         }
       },
       {
+        hidden: true,
         path: 'detail',
         name: 'NoticeDetail',
         component: () => import('@/views/notice/NoticeDetail.vue')
       },
       {
+        hidden: true,
         path: 'register',
         name: 'NoticeRegister',
         component: () => import('@/views/notice/NoticeRegister.vue')

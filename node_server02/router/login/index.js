@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../config/database.js');
-const crypto = require('crypto')
+const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 
 router.post('/', (req, res) => {

@@ -52,13 +52,26 @@
   // import axios from 'axios'
   import camelCase from 'camelcase-keys'
   import {noticeList} from '@/api/app.js'
+  import Cookies from 'js-cookie'
   export default {
     data() {
       return {
         noticeData: [],
         total: 1,
         pageSize: 10,
-        currentPage: 1
+        currentPage: 1,
+        options: [{
+          value: '10',
+          label: '전체'
+        }, {
+          value: '20',
+          label: '제목'
+        }, {
+          value: '30',
+          label: '내용'
+        }],
+        noticeOption: '10',
+        search: ''
       }
     },
     methods: {
@@ -67,7 +80,7 @@
         noticeList({search:this.search})
         .then(res => {
           const data = camelCase(res.data.body)
-          console.log('data = ', data)
+          console.log('res = ', data)
           // this.noticeData = data
 
           console.log('data.length =', data.length);

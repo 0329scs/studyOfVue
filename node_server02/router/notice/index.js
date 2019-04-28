@@ -34,12 +34,13 @@ router.post('/register', upload.single('image'), (req, res) => {
   // console.log(req.body)
 
   // 이미지 처리
-  console.log('req.file', req.file)
+  
 
   let oriImgName = '',
       phyImgName = ''
 
   if(req.file) {
+    console.log('req.file', req.file)
     oriImgName = req.file.originalname
     phyImgName = req.file.filename
   }

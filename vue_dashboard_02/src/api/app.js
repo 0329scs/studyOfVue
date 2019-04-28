@@ -16,10 +16,11 @@ export const userLogin = (data) => {
 
 // notice...
 export const noticeList = (params) => {
-    return service({
-        url: `/notice/list/${params}`,
-        method: 'get'
-    })
+    // return service({
+    //     url: `/notice/list/${params}`,
+    //     method: 'get'
+    // })
+    return service.get('/notice/list', {params})
 }
 export const noticeDetail = (data) => {
     return service({
